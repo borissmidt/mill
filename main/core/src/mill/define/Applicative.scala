@@ -34,7 +34,7 @@ object Applicative {
 
     def zipMap[R]()(cb: Ctx => Z[R]) = mapCtx(zip()) { (_, ctx) => cb(ctx) }
     def zipMap[A, R](a: T[A])(f: (A, Ctx) => Z[R]) = mapCtx(a)(f)
-    def zipMapLong[R](xs: IndexedSeq[T[Any]])(f: (IndexedSeq[Any], Ctx) => Z[R]) = {
+    def zipMapLong[R](xs: Seq[T[Any]])(f: (IndexedSeq[Any], Ctx) => Z[R]) = {
       var recursiveZipped: T[_] = zip()
       for(x <- xs) {
         recursiveZipped = zip(recursiveZipped, x)
